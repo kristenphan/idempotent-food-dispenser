@@ -1,0 +1,48 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://draw.rabobank.com",
+  "elements": [
+    {
+      "id": "Z-88KR3GZNEAkAI4w3mP2",
+      "type": "text",
+      "x": 293.7578125,
+      "y": 182.18359375,
+      "width": 260.1197509765625,
+      "height": 25,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 2138605231,
+      "version": 46,
+      "versionNonce": 640389249,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1726232420371,
+      "link": null,
+      "locked": false,
+      "text": "Idempotent food dispenser",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "baseline": 18,
+      "containerId": null,
+      "originalText": "Idempotent food dispenser",
+      "lineHeight": 1.25
+    }
+  ],
+  "appState": {
+    "gridSize": null,
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}
