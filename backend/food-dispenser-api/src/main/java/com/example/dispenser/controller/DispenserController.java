@@ -1,13 +1,11 @@
-package com.example.idempotentfooddispenser.controller;
+package com.example.dispenser.controller;
 
-import com.example.idempotentfooddispenser.model.ApiResponse;
-import com.example.idempotentfooddispenser.model.FeedRecord;
-import com.example.idempotentfooddispenser.model.FeedRequest;
+import com.example.dispenser.model.ApiResponse;
+import com.example.dispenser.model.FeedRecord;
+import com.example.dispenser.model.FeedRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Slf4j
 @RestController

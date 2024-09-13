@@ -1,4 +1,4 @@
-package com.example.idempotentfooddispenser.model;
+package com.example.dispenser.model;
 
 public class FeedRecord {
 	private Long id;
