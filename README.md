@@ -6,3 +6,7 @@ What excites Kristen (aka. acceptance criteria)?
 - Implement idempotent API with Spring Boot using idempotency key
 - Use Redis for caching idempotency keys
 - Create CI/CD pipeline with GitHub Actions: can I deploy locally?
+
+## Architecture
+
+![img.png](architecture.png)
