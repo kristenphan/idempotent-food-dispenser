@@ -1,0 +1,11 @@
+### Perform health check
+GET {{host}}health
+
+### Feed the cat
+POST {{host}}feed
+Content-Type: application/json
+
+{
+  "petName": "Chinsu",
+  "timestamp": -1
+}
