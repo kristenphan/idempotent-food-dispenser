@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>idempotent-food-dispenser</artifactId>
+    <artifactId>food-dispenser-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>idempotent-food-dispenser</name>
-    <description>idempotent-food-dispenser</description>
+    <name>food-dispenser-api</name>
+    <description>food-dispenser-api</description>
     <url/>
     <licenses>
         <license/>
@@ -42,6 +42,14 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
         </dependency>
     </dependencies>
 
