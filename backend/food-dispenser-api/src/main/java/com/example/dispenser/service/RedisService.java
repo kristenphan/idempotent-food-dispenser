@@ -1,6 +1,6 @@
 package com.example.dispenser.service;
 
-import com.example.dispenser.config.RedisConfig;
+import com.example.dispenser.model.IdempotencyDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -11,20 +11,20 @@ import java.util.Objects;
 @Service
 @Slf4j
 public class RedisService {
-	RedisTemplate<String, Object> redisTemplate;
+	RedisTemplate<String, IdempotencyDetails> redisTemplate;
 
 	@Autowired
-	public RedisService(RedisTemplate<String, Object> redisTemplate) {
+	public RedisService(RedisTemplate<String, IdempotencyDetails> redisTemplate) {
 		this.redisTemplate = redisTemplate;
 	}
 
-	public void set(String key, Object value) {
-		log.info("Writing to Redis: key={}, value={}", key, value);
-		redisTemplate.opsForValue().set(key, value);
+	public void set(String idempotencyKey, IdempotencyDetails idempotencyDetails) {
+		log.info("Writing to Redis: key={}, value={}", idempotencyKey, idempotencyDetails);
+		redisTemplate.opsForValue().set(idempotencyKey, idempotencyDetails);
 	}
 
-	public String get(String key) {
-		log.info("Reading from Redis: key={}", key);
-		return Objects.requireNonNull(redisTemplate.opsForValue().get(key)).toString();
+	public IdempotencyDetails get(String idempotencyKey) {
+		log.info("Reading from Redis for key={}", idempotencyKey);
+		return redisTemplate.opsForValue().get(idempotencyKey);
 	}
 }
