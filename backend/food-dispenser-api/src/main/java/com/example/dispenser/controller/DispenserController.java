@@ -23,7 +23,7 @@ public class DispenserController {
 	@GetMapping("health")
 	public String getHealthCheck() {
 		log.info("Getting health check request");
-		return "Service is up and running!";
+		return "Food Dispenser API is up and running!";
 	}
 
 	@PostMapping("feed")
