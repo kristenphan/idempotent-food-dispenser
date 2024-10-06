@@ -4,8 +4,9 @@ GET {{host}}health
 ### Feed the cat
 POST {{host}}feed
 Content-Type: application/json
+Idempotency-Key: 15
 
 {
   "petName": "Chinsu",
-  "timestamp": -1
+  "timestamp": 15
 }

@@ -3,8 +3,10 @@ package com.example.dispenser.controller;
 import com.example.dispenser.model.ApiResponse;
 import com.example.dispenser.model.FeedRecord;
 import com.example.dispenser.model.FeedRequest;
-import com.example.dispenser.service.RedisService;
+import com.example.dispenser.model.FeedResponse;
+import com.example.dispenser.service.DispenserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,10 +14,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/")
 public class DispenserController {
-	RedisService redisService;
+	DispenserService dispenserService;
 
-	public DispenserController(RedisService redisService) {
-		this.redisService = redisService;
+	public DispenserController(DispenserService dispenserService) {
+		this.dispenserService = dispenserService;
 	}
 
 	@GetMapping("health")
@@ -25,20 +27,23 @@ public class DispenserController {
 	}
 
 	@PostMapping("feed")
-	public ResponseEntity<ApiResponse<FeedRecord>> feed(@RequestBody FeedRequest feedRequest) {
-		log.info("Feeding the pet with request: " + feedRequest.toString());
+	public ResponseEntity<ApiResponse<FeedRecord>> feed(
+			@RequestHeader("Idempotency-Key") String idempotencyKey,
+			@RequestBody FeedRequest feedRequest) {
+		log.info("Feeding the pet with idempotencyKey={} and request={}", idempotencyKey, feedRequest.toString());
 
-		redisService.set(feedRequest.getPetName(), feedRequest.getTimestamp());
-		String value = redisService.get(feedRequest.getPetName());
+		FeedResponse feedResponse = dispenserService.feed(idempotencyKey, feedRequest.getPetName(), feedRequest.getTimestamp());
 
-		log.info("Cached value for {}: {}", feedRequest.getPetName(), value);
-
-		ApiResponse<FeedRecord> response = new ApiResponse<>(
-				true,
-				String.format("%s fed successfully at %d", feedRequest.getPetName(), feedRequest.getTimestamp()),
+		ApiResponse<FeedRecord> apiResponse = new ApiResponse<>(
+				feedResponse.isSuccess(),
+				feedResponse.getMessage(),
 				null
 		);
 
-		return ResponseEntity.ok(response);
+		if (feedResponse.isSuccess()) {
+			return ResponseEntity.ok(apiResponse);
+		} else {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(apiResponse);
+		}
 	}
 }
